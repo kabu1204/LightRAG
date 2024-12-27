@@ -12,6 +12,7 @@ from .llm import (
 )
 from .operate import (
     chunking_by_token_size,
+    custom_chunking,
     extract_entities,
     # local_query,global_query,hybrid_query,
     kg_query,
@@ -133,6 +134,7 @@ class LightRAG:
     chunk_token_size: int = 1200
     chunk_overlap_token_size: int = 100
     tiktoken_model_name: str = "gpt-4o-mini"
+    chunking_func: callable = chunking_by_token_size
 
     # entity extraction
     entity_extract_max_gleaning: int = 1
@@ -320,11 +322,12 @@ class LightRAG:
                         **dp,
                         "full_doc_id": doc_key,
                     }
-                    for dp in chunking_by_token_size(
+                    for dp in custom_chunking(
                         doc["content"],
                         overlap_token_size=self.chunk_overlap_token_size,
                         max_token_size=self.chunk_token_size,
                         tiktoken_model=self.tiktoken_model_name,
+                        func=self.chunking_func,
                     )
                 }
                 inserting_chunks.update(chunks)

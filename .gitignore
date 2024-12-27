@@ -15,3 +15,12 @@ ignore_this.txt
 gui/
 *.log
 .vscode
+.env/
+preprocess/tree-sitter-*
+deepseek-*/
+deepseekv3-*/
+glm-*/
+glm4*/
+lib/
+.DS_Store
+models/

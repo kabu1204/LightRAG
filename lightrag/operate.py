@@ -52,6 +52,17 @@ def chunking_by_token_size(
         )
     return results
 
+def custom_chunking(content: str, overlap_token_size=128, max_token_size=1024, tiktoken_model="gpt-4o", func=chunking_by_token_size):
+    results = []
+    results = func(content, overlap_token_size, max_token_size, tiktoken_model)
+
+    for i in range(len(results)):
+        if results[i].get("tokens", None) is None:
+            n_tokens = len(encode_string_by_tiktoken(results[i]["content"], model_name=tiktoken_model))
+            results[i]["tokens"] = n_tokens
+            logger.info(f"Chunk {i}: {n_tokens} tokens")
+
+    return results
 
 async def _handle_entity_relation_summary(
     entity_or_relation_name: str,
