@@ -79,10 +79,10 @@ async def main():
             working_dir=WORKING_DIR,
             llm_model_func=deepseek_llm_model_func,
             # llm_model_func=ollama_model_complete,
-            # llm_model_name="qwen2.5:1.5b",
+            # llm_model_name="llama3.2:latest",
             # llm_model_max_async=4,
             # llm_model_max_token_size=10240,
-            # llm_model_kwargs={"host": "http://137.189.89.85:11434", "options": {"num_ctx": 10240}},
+            # llm_model_kwargs={"host": "http://localhost:11434", "options": {"num_ctx": 10240}},
             embedding_func=EmbeddingFunc(
                 embedding_dim=embedding_dimension,
                 max_token_size=8192,
