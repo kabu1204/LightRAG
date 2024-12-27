@@ -8,7 +8,7 @@ from .code import chunking_code_repo
 from FlagEmbedding import BGEM3FlagModel
 embedding_model = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True, cache_dir="./models") # Setting use_fp16 to True speeds up computation with a slight performance degradation
 
-WORKING_DIR = "./dickens"
+WORKING_DIR = "./workdir"
 
 if not os.path.exists(WORKING_DIR):
     os.mkdir(WORKING_DIR)
@@ -106,7 +106,7 @@ async def main():
         # Perform local search
         print(
             await rag.aquery(
-                "Introduce the repo", param=QueryParam(mode="local")
+                "How is the repo organized", param=QueryParam(mode="local")
             )
         )
 

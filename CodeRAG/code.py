@@ -11,9 +11,6 @@ import json
 PY_LANGUAGE = Language(tspy.language())
 MD_LANGUAGE = Language(tsmd.language())
 
-testfilename = "./test.py"
-
-
 '''
 import_from_statement:
     from aaa import bbb as ccc
@@ -88,7 +85,7 @@ class DocFileChunker:
         self.import_parser = ImportParser(current_module)
         self.filepath = filepath
         self.current_module = current_module
-        self.max_chunk_size = 32*1024
+        self.max_chunk_size = 12*1024
         self.parser = parser
         self.metadata_chunks: List[str] = []
         self.metadata_chunks.extend(self.get_metadata_chunks())
@@ -355,7 +352,10 @@ class CodeRepoParser:
             self.doc_parsers.append(DocFileChunker(filepath, self.module_name, "function", Parser(MD_LANGUAGE)))
 
     def get_repo_metadata_chunks(self) -> List[str]:
-        desc = CODE_REPO_TEMPLATE["REPO_DESCRIPTION"].format(module_name=self.module_name, code_files=self.code_files)
+        files = []
+        files.extend(self.code_files)
+        files.extend(self.text_files)
+        desc = CODE_REPO_TEMPLATE["REPO_DESCRIPTION"].format(module_name=self.module_name, files=files)
         return [desc]
 
     def parse(self):
@@ -395,15 +395,5 @@ def chunking_code_repo(repo_desc: str, overlap_token_size, max_token_size, tikto
 
 if __name__ == "__main__":
     parser = Parser(PY_LANGUAGE)
-
-    content = ""
-    with open(testfilename, 'rb') as f:
-        content = f.read()
-
-    repo_parser = CodeRepoParser("lightrag", "lightrag", "class")
-
-    repo_parser.parse()
-
-    print(f"Number of chunks: {len(repo_parser.get_chunks())}")
 
     # parser.parse

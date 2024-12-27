@@ -1,7 +1,7 @@
 CODE_REPO_TEMPLATE = {}
 
 CODE_REPO_TEMPLATE["REPO_DESCRIPTION"] = """This is a code repository that contains code about a python module named *{module_name}*.
-It has several python source code files. Here is the list of the files: {code_files}.
+It has several python source code files and documentation files. Here is the list of the files: {files}.
 """
 
 CODE_REPO_TEMPLATE["CODE_DESCRIPTION"] = """This is a python source code file of the python module named *{module_name}*.

@@ -27,3 +27,9 @@ tiktoken
 torch
 transformers
 xxhash
+
+# CodeRAG
+tree_sitter
+tree_sitter_python
+tree_sitter_markdown
+FlagEmbedding
