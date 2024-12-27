@@ -24,3 +24,9 @@ glm4*/
 lib/
 .DS_Store
 models/
+inputs
+rag_storage
+.env
+venv/
+examples/input/
+examples/output/
